@@ -1,4 +1,4 @@
-#Monthly Budget Forecasting with NeuralProphet
+Monthly Budget Forecasting with NeuralProphet
 
 This project implements a monthly time-series forecasting pipeline using NeuralProphet. It trains a model on historical budget data and generates forecasts with visualization of training, testing, and predicted values.
 
@@ -16,7 +16,10 @@ Forecast visualization
 
 Reproducible training setup
 
-Project Structure . ├── budgetdata.csv ├── forecast.py └── README.md
+Project Structure .
+├── budgetdata.csv
+├── forecast.py 
+└── README.md
 
 budgetdata.csv – Input dataset
 
