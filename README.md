@@ -31,7 +31,7 @@ A PySide2 desktop application that performs survival analysis on employee data a
 ### How to Run
 
 ```bash
-cd employeeChurn_App
+cd EmployeeChurn_App
 pip install -r requirements.txt   # or install individually
 python main.py
 
