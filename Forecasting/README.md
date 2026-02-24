@@ -1,123 +1,94 @@
-Monthly Budget Forecasting with NeuralProphet
+# Monthly Budget Forecasting with NeuralProphet
 
 This project implements a monthly time-series forecasting pipeline using NeuralProphet. It trains a model on historical budget data and generates forecasts with visualization of training, testing, and predicted values.
 
-The project demonstrates:
+## Features
 
-Time-series preprocessing
+- Time-series preprocessing
+- Frequency handling (monthly end)
+- Train/test split
+- NeuralProphet modeling
+- Forecast visualization
+- Reproducible training setup
 
-Frequency handling (monthly end)
+## Requirements
 
-Train/test split
+Important: NeuralProphet currently has a compatibility issue with PyTorch 2.6+. Use the recommended versions below.
 
-NeuralProphet modeling
+- Python 3.10
+- torch == 2.5.1
+- neuralprophet >= 0.6.x
+- pandas
+- numpy
+- matplotlib
 
-Forecast visualization
+### Installation
 
-Reproducible training setup
+Create a virtual environment and install dependencies:
 
-Project Structure .
-├── budgetdata.csv
-├── forecast.py 
-└── README.md
+```bash
+cd forecasting_model
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+venv\Scripts\activate           # Windows
 
-budgetdata.csv – Input dataset
+pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1
+pip install neuralprophet pandas numpy matplotlib
 
-forecast.py – Training and forecasting script
 
-README.md – Documentation
+Dataset Format
+Place a CSV file (e.g., budgetdata.csv) in the folder with the following columns:
 
-Requirements
-
-Recommended stable environment:
-
-Python 3.10
-
-torch 2.5.1
-
-neuralprophet >= 0.6.x
-
-pandas
-
-numpy
-
-matplotlib
-
-Important Compatibility Note
-
-PyTorch 2.6 introduced secure checkpoint loading (weights_only=True by default), which is not fully compatible with current NeuralProphet releases.
-
-If you encounter:
-
-UnpicklingError: Weights only load failed
-
-Downgrade PyTorch to:
-
-torch==2.5.1
-
-This resolves the issue.
-
-Installation
-
-Create a virtual environment:
-
-python -m venv venv source venv/bin/activate # macOS/Linux venv\Scripts\activate # Windows
-
-Install dependencies:
-
-pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pip install neuralprophet pandas numpy matplotlib Dataset Format
-
-The CSV file must contain the following columns:
-
-Date Budget 2020-01-31 5000 2020-02-29 5200
-
-The script renames:
+Date	Budget
+2020-01-31	5000
+2020-02-29	5200
+The script automatically renames:
 
 Date → ds
 
 Budget → y
 
-The frequency is automatically handled as monthly end (ME).
+Frequency is handled as monthly end (ME).
 
-Model Configuration
+Usage
+Run the forecasting script:
 
-Example configuration:
+bash
+python forecast.py
+The script will:
 
-model = NeuralProphet( seasonality_mode="multiplicative", learning_rate=0.01 )
+Load and preprocess the data
 
+Split into training (85%) and testing (15%) sets
+
+Train a NeuralProphet model with multiplicative seasonality
+
+Generate a forecast plot comparing training, test, and predicted values
+
+Model Configuration Example
+python
+model = NeuralProphet(
+    seasonality_mode="multiplicative",
+    learning_rate=0.01
+)
 model.fit(train_df, freq="ME")
-
 Key settings:
 
 seasonality_mode="multiplicative" handles proportional growth
 
 freq="ME" specifies monthly end frequency
 
-85% training split
-
-15% testing split
-
-Fixed random seed for reproducibility
+Fixed random seed ensures reproducibility
 
 Output
+A plot showing the training data, test data, and forecast.
 
-The script produces:
+Forecasted monthly budget values (printed or optionally saved).
 
-Forecasted monthly budget values
+Extending the Model
+This basic pipeline can be enhanced with:
 
-A plot comparing:
-
-Training data
-
-Test data
-
-Model forecast
-
-Model Extensions
-
-This project can be extended with:
-
-MAE, RMSE, and MAPE evaluation
+Evaluation metrics (MAE, RMSE, MAPE)
 
 Cross-validation
 
@@ -125,20 +96,13 @@ Hyperparameter tuning
 
 Model comparison (Prophet, SARIMA, XGBoost)
 
-API deployment (Flask or FastAPI)
+API deployment (Flask/FastAPI)
 
-Dashboard visualization (Streamlit)
-
-Alternative Models
-
-If NeuralProphet compatibility issues persist, consider:
-
-Prophet
-
-SARIMA (statsmodels)
-
-Gradient boosting regression for time-series
+Interactive dashboard (Streamlit)
 
 License
+This project is provided for educational and professional use.
 
-MIT License
+Author
+
+Elphus
