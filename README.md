@@ -1,7 +1,7 @@
 
 ---
 
-## 📊 employeeChurn_App – Survival Analysis Dashboard
+## 📊 EmployeeChurn_App – Survival Analysis Dashboard
 
 A PySide2 desktop application that performs survival analysis on employee data and visualizes retention patterns.
 
