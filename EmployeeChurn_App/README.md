@@ -1,47 +1,53 @@
-Project Structure
 
-├── main.py                     # Application entry point
-├── userInterfaceForGraphsSufABQ.py  # Generated UI file (from Qt Designer)
-├── README.md                   # This file
-└── dummy_data.csv              # Example test data (optional)
+---
 
-Usage
-Prepare your Excel file
-Ensure it contains at least the following columns:
+## 📊 EmployeeChurn_App – Survival Analysis Dashboard
+
+A PySide2 desktop application that performs survival analysis on employee data and visualizes retention patterns.
+
+### Features
+
+- Load an Excel file (`.xlsx` or `.xls`) containing employee records.
+- Automatically preprocess the data:
+  - Convert date columns (`StartDate`, `EndDate`, `DOB`) to datetime.
+  - Calculate employment duration in months.
+  - Create an event indicator (1 if employee left, 0 if still active).
+  - Compute age and assign age groups (`18‑25`, `26‑31`, `32‑37`, `38‑43`, `44‑49`, `50+`).
+  - Assign experience groups based on tenure (`0‑2 yrs`, `2‑5 yrs`, `5‑10 yrs`, `10+ yrs`).
+- Display three Kaplan‑Meier survival curves (by **Age Group**, **Experience Group**, and **Department**) in separate pages of a stacked widget.
+- Fit a Cox proportional hazards model and show a horizontal bar chart of variable significance (`‑log₂(p‑value)`).
+- Switch between graph pages using simple buttons.
+
+### Requirements
+
+- Python 3.7+
+- PySide2
+- pandas
+- matplotlib
+- numpy
+- lifelines
+- openpyxl
+
+### How to Run
+
+```bash
+cd EmployeeChurn_App
+pip install -r requirements.txt   # or install individually
+python main.py
+
+Click load and select your Excel file.
+
+Data Format
+The input Excel file must contain at least these columns:
 
 StartDate – start date of employment (e.g., 2020-01-15)
 
-EndDate – leave date (leave blank if employee still active)
+EndDate – leave date (leave blank if still active)
 
 DOB – date of birth
 
-Department – department name (e.g., Engineering, Sales)
-
-Run the application
-
-python main.py
-
-Click the load button and select your Excel file.
-
-After loading, three pages will be populated with:
-
-Page 1 – Kaplan‑Meier curve by Age Group
-
-Page 2 – Kaplan‑Meier curve by Experience Group (left) and Department (right)
-
-Page 3 – Cox model significance bar chart
-
-Use the buttons (frame1, frame2, frame3) to switch between pages.
-
-Customization
-Adjust bin edges – Modify age_bins, age_labels, exp_bins, or exp_labels in load_data_and_plot().
-
-Change prediction horizon – The KM curves display survival after 6 months; you can change the predict_months argument in embed_km_curve().
-
-Add more plots – Extend the embed_graphs method to include additional frames.
-
-Example Dummy Data
-A sample dummy_data.csv is provided for testing. It contains 20 records with plausible dates and departments. To use it, open the CSV in Excel and save as an .xlsx file, then load it into the app.
+Department – department name
+file, then load it into the app.
 
 Troubleshooting
 TypeError: addWidget with FigureCanvas – Ensure Matplotlib is using the Qt5Agg backend and that FigureCanvasQTAgg is correctly imported. The code in main.py includes a safety check and fallback label.
