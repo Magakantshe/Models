@@ -1,36 +1,3 @@
+The **EmployeeChurn_App** is a **desktop application** built with **PySide2** that performs **survival analysis** on employee data to visualize retention patterns. It loads an Excel file containing employee records and automatically preprocesses the data by converting date columns, calculating employment duration, generating an event indicator for churn, and deriving age and experience groups. The application then displays interactive **Kaplan‑Meier survival curves** stratified by **age group**, **experience group**, and **department**, and fits a **Cox proportional hazards model** whose variable significance is shown as a horizontal bar chart. The interface uses a stacked widget with simple buttons to switch between the different graph pages, providing an intuitive way to explore employee churn dynamics.
 
----
-
-## 📊 employeeChurn_App – Survival Analysis Dashboard
-
-A PySide2 desktop application that performs survival analysis on employee data and visualizes retention patterns.
-
-### Features
-
-- Load an Excel file (`.xlsx` or `.xls`) containing employee records.
-- Automatically preprocess the data:
-  - Convert date columns (`StartDate`, `EndDate`, `DOB`) to datetime.
-  - Calculate employment duration in months.
-  - Create an event indicator (1 if employee left, 0 if still active).
-  - Compute age and assign age groups (`18‑25`, `26‑31`, `32‑37`, `38‑43`, `44‑49`, `50+`).
-  - Assign experience groups based on tenure (`0‑2 yrs`, `2‑5 yrs`, `5‑10 yrs`, `10+ yrs`).
-- Display three Kaplan‑Meier survival curves (by **Age Group**, **Experience Group**, and **Department**) in separate pages of a stacked widget.
-- Fit a Cox proportional hazards model and show a horizontal bar chart of variable significance (`‑log₂(p‑value)`).
-- Switch between graph pages using simple buttons.
-
-### Requirements
-
-- Python 3.7+
-- PySide2
-- pandas
-- matplotlib
-- numpy
-- lifelines
-- openpyxl
-
-### How to Run
-
-```bash
-cd employeeChurn_App
-pip install -r requirements.txt   # or install individually
-python main.py
+The **Forecasting_model** project implements a monthly **time‑series forecasting pipeline** using **NeuralProphet**. It reads a CSV file with historical budget data, automatically renames columns for compatibility, and handles monthly frequency. The data is split into training and testing sets, and a NeuralProphet model with **multiplicative seasonality** is trained to capture trends and seasonality. The pipeline generates a forecast plot that overlays the training data, test data, and predicted values, allowing visual assessment of model performance. This setup provides a reproducible foundation for budget forecasting that can be extended with additional evaluation metrics or alternative models.
